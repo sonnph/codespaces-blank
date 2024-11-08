@@ -11,6 +11,17 @@ app.get('/', (req, res) => {
     res.send('Xin chào từ server Node.js!');
 });
 
+router1.get('/router1', (req, res) => {
+    res.send('router 1 user');
+});
+
+router2.get('/router2', (req, res) => {
+    res.send('router 2 user');
+});
+
+app.use('/api/', router1);
+app.use('/api/', router2);
+
 app.use('/static', express.static(path.join(__dirname, 'view')));
 
 //Lắng nghe kết nối tại port
