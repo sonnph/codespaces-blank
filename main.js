@@ -6,9 +6,25 @@ const path = require('path');
 const router1 = express.Router();
 const router2 = express.Router();
 
+// Middleware xử lý dữ liệu JSON
+app.use(express.json());
+
+// Import route từ thư mục routes
+const indexRouter = require('./router/router1');
+app.use('/indexRouter', indexRouter)
+
+app.use((req, res, next) => {
+    console.log(`${req.method} request to ${req.url}`);
+    next();
+})
+
 // Định nghĩa 1 route GET cơ bản
 app.get('/', (req, res) => {
     res.send('Xin chào từ server Node.js!');
+});
+
+app.get('/about', (req, res) => {
+    res.send('this is the about page');
 });
 
 router1.get('/router1', (req, res) => {
